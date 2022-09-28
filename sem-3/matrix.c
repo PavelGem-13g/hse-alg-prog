@@ -3,7 +3,7 @@
 
 #define lmax 20
 
-int main() {
+int matrix() {
     int nb, na, ma;
     int b[lmax], a[lmax][lmax];
     int min = INT_MAX-1;
@@ -38,4 +38,3 @@ int main() {
         printf("Нет минимума");
     }
     return 0;
-}
