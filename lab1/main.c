@@ -52,43 +52,42 @@ int main() {
                 ++k;
             }
         }
-        for (int i = neg_i; i < n; ++i,++k) {
+        for (int i = neg_i; i < n; ++i, ++k) {
             R[k] = R[i];
         }
-        neg_i -= n-k;
+        neg_i -= n - k;
         printf("%d %d\n", n, k);
-        if(n==k){
+        if (n == k) {
             printf("Нет элементов для удаления\n");
             printf("Задача 3 \n");
             printf("Нельзя посчитать среднее значение по условию задачи\n");
-        } else{
+        } else {
             print_array(k, R);
 
             printf("Задача 3 \n");
             pos_i = -1;
             for (int i = 0; i < k; ++i) {
-                pos_i = (R[i]>0)? i:pos_i;
+                pos_i = (R[i] > 0) ? i : pos_i;
             }
-            if(pos_i!=-1){
+            if (pos_i != -1) {
                 start = neg_i;
                 end = pos_i;
-                if(start>end){
+                if (start > end) {
                     temp = start;
                     start = end;
                     end = temp;
                 }
-                if (end-start > 0) {
+                if (end - start > 0) {
                     sum = 0;
                     for (int i = start; i < end + 1; ++i) {
                         sum += R[i];
                     }
-                    srznach = sum / (end-start+1);
+                    srznach = sum / (end - start + 1);
                     printf("Среднее арифметическое %lg", srznach);
                 } else {
                     printf("Нельзя посчитать среднее значение");
                 }
-            }
-            else{
+            } else {
                 printf("Нельзя найти последний положительный элемент\n");
                 printf("Нельзя посчитать среднее значение по условию задачи\n");
             }
