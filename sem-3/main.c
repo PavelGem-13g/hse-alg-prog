@@ -9,7 +9,7 @@ int main() {
     int min = INT_MAX-1;
     short flag = 0;
     scanf("%d %d %d", &na, &ma, &nb);
-
+    
     for (int i = 0; i < na; ++i) {
         for (int j = 0; j < ma; ++j) {
             scanf("%d ", &a[i][j]);
@@ -26,7 +26,7 @@ int main() {
             while (k<=nb && (a[i][j]!=b[k])){
                 ++k;
             }
-            if (k>nb && a[i][j]){
+            if (k>nb && a[i][j]<=min){
                 min = a[i][j];
                 flag = 1;
             }
