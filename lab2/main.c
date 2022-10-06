@@ -93,14 +93,13 @@ int main() {
             }
         }
     }
-
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if(A[i][j]==C[max_i][max_j]){
-                C[max_i][max_j] = 0;
-                break;
-            }
+    int flag = 0;
+    for (int i = 0; i < n && !flag; ++i) {
+        if(A[i][0]==C[max_i][max_j]){
+            C[max_i][max_j] = 0;
+            flag = 1;
         }
+
     }
     for (int i = 0; i < p; ++i) {
         for (int j = 0; j < q; ++j) {

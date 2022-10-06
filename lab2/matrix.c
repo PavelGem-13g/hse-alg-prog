@@ -50,7 +50,7 @@ int get_value(int min, int max, char phrase[]) {
 }
 
 
-int main() {
+int matrix() {
     int n, m, x, y, p, q, B[lmax][lmax],A[lmax][lmax], C[lmax][lmax], max_i = 0, max_j = 0;//почему-то компилятор не даёт поставить больше значения
     n = get_value(2, INT_MAX, "Введите число n");
     m = get_value(2, INT_MAX, "Введите число m");
@@ -93,14 +93,13 @@ int main() {
             }
         }
     }
-
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if(A[i][j]==C[max_i][max_j]){
-                C[max_i][max_j] = 0;
-                break;
-            }
+    int flag = 0;
+    for (int i = 0; i < n && !flag; ++i) {
+        if(A[i][0]==C[max_i][max_j]){
+            C[max_i][max_j] = 0;
+            flag = 1;
         }
+
     }
     for (int i = 0; i < p; ++i) {
         for (int j = 0; j < q; ++j) {

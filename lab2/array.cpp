@@ -52,7 +52,7 @@ int main() {
     int n = 0, z = 0, A[lmax], B[lmax], count = 0, temp = 0, k = 0;
     setlocale(LC_ALL, "RU");
     n = get_value(1, lmax, "Введите число n");
-    z = get_value(0, 10, "Введите число z");
+    z = get_value(0, 10, "Введите цифру z");
     for (int i = 0; i < n; ++i) {
         A[i] = get_value(INT_MIN, INT_MAX, "Введите новый элемент");
     }
