@@ -1,8 +1,8 @@
-//#include <stdio.h>
-//#include <limits.h>
-//#include <locale.h>
+#include <stdio.h>
+#include <limits.h>
+#include <locale.h>
 
-//#define lmax
+#define LMAX SHRT_MAX
 
 
 int count_contains(int a, int z) {
@@ -49,9 +49,10 @@ int get_value(int min, int max, char phrase[]) {
 
 
 int main() {
-    int n = 0, z = 0, A[lmax], B[lmax], count = 0, temp = 0, k = 0;
     setlocale(LC_ALL, "RU");
-    n = get_value(1, lmax, "Введите число n");
+    printf("Лабораторная работа №2 \nВыполнил: Пашенцев Павел Владимирович\nЗадача 2\n");
+    int n = 0, z = 0, A[LMAX], B[LMAX], count = 0, temp = 0, k = 0;
+    n = get_value(1, LMAX, "Введите число n");
     z = get_value(0, 10, "Введите цифру z");
     for (int i = 0; i < n; ++i) {
         A[i] = get_value(INT_MIN, INT_MAX, "Введите новый элемент");
@@ -65,6 +66,7 @@ int main() {
         }
         count += temp;
     }
+    short
     printf("%d встречается в массиве %d раз\n", z, count);
     prit_array(B, k);
     return 0;

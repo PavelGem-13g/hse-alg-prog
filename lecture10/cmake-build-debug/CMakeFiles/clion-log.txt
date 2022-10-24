@@ -1,0 +1,76 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/pavel/Git/hse-alg-prog/lecture10 -B /Users/pavel/Git/hse-alg-prog/lecture10/cmake-build-debug
+-- The C compiler identification is unknown
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - failed
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc - broken
+CMake Error at /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeTestCCompiler.cmake:69 (message):
+  The C compiler
+
+    "/usr/bin/cc"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: /Users/pavel/Git/hse-alg-prog/lecture10/cmake-build-debug/CMakeFiles/CMakeTmp
+    
+    Run Build Command(s):/Applications/CLion.app/Contents/bin/ninja/mac/ninja cmTC_a33ae && [1/2] Building C object CMakeFiles/cmTC_a33ae.dir/testCCompiler.c.o
+    FAILED: CMakeFiles/cmTC_a33ae.dir/testCCompiler.c.o 
+    /usr/bin/cc   -arch arm64 -o CMakeFiles/cmTC_a33ae.dir/testCCompiler.c.o -c /Users/pavel/Git/hse-alg-prog/lecture10/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
+    2022-10-21 09:34:04.982 xcodebuild[8869:486714] [MT] DVTPlugInLoading: Failed to load code for plug-in com.apple.dt.IDESimulatorAvailability (/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin), error = Error Domain=NSCocoaErrorDomain Code=3588 "dlopen(/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, 0x0109): Symbol not found: (_OBJC_CLASS_$_SimDiskImage)
+      Referenced from: '/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability'
+      Expected in: '/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator'" UserInfo={NSLocalizedFailureReason=The bundle couldn’t be loaded., NSLocalizedRecoverySuggestion=Try reinstalling the bundle., NSFilePath=/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, NSDebugDescription=dlopen(/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, 0x0109): Symbol not found: (_OBJC_CLASS_$_SimDiskImage)
+      Referenced from: '/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability'
+      Expected in: '/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator', NSBundlePath=/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin, NSLocalizedDescription=The bundle “IDESimulatorAvailability” couldn’t be loaded.}, dyldError = dlopen(/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, 0x0000): Symbol not found: (_OBJC_CLASS_$_SimDiskImage)
+      Referenced from: '/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability'
+      Expected in: '/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator'
+    2022-10-21 09:34:05.004 xcodebuild[8869:486714] [MT] DVTAssertions: ASSERTION FAILURE in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/DVTFrameworks/DVTFrameworks-21304/DVTFoundation/PlugInArchitecture/DataModel/DVTPlugIn.m:374
+    Details:  Failed to load code for plug-in com.apple.dt.IDESimulatorAvailability (/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin)
+    Please ensure Xcode packages are up-to-date — try running 'xcodebuild -runFirstLaunch'.
+    
+    NSBundle error: Error Domain=NSCocoaErrorDomain Code=3588 "dlopen(/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, 0x0109): Symbol not found: (_OBJC_CLASS_$_SimDiskImage)
+      Referenced from: '/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability'
+      Expected in: '/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator'" UserInfo={NSLocalizedFailureReason=The bundle couldn’t be loaded., NSLocalizedRecoverySuggestion=Try reinstalling the bundle., NSFilePath=/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, NSDebugDescription=dlopen(/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability, 0x0109): Symbol not found: (_OBJC_CLASS_$_SimDiskImage)
+      Referenced from: '/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin/Contents/MacOS/IDESimulatorAvailability'
+      Expected in: '/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator', NSBundlePath=/Applications/Xcode.app/Contents/PlugIns/IDESimulatorAvailability.ideplugin, NSLocalizedDescription=The bundle “IDESimulatorAvailability” couldn’t be loaded.}
+    Object:   <DVTPlugIn: 0x600000880820>
+    Method:   -loadAssertingOnError:error:
+    Thread:   <_NSMainThread: 0x600002cd4300>{number = 1, name = main}
+    Hints: 
+    
+    Backtrace:
+      0  0x00000001025453d0
+      1  0x0000000102544aac
+      2  0x0000000102544c2c
+      3  0x00000001023f326c
+      4  0x00000001023b90d8
+      5  0x00000001023b74e8
+      6  0x000000018c5c41b4
+      7  0x000000018c5d3414
+      8  0x000000010258954c
+      9  0x0000000102565470
+     10  0x00000001023b7380
+     11  0x00000001023b75a0
+     12  0x000000010347b2ec
+     13  0x000000010347aae0
+     14  0x000000010347a1e8
+     15  0x0000000100e18324
+     16  0x0000000100a09e0c
+    sh: line 1:  8873 Abort trap: 6           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -find clang 2> /dev/null
+    cc: error: sh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -find clang 2> /dev/null' failed with exit code 34304: (null) (errno=Invalid argument)
+    xcode-select: Failed to locate 'clang', requesting installation of command line developer tools.
+    ninja: build stopped: subcommand failed.
+    
+    
+
+  
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/Users/pavel/Git/hse-alg-prog/lecture10/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/Users/pavel/Git/hse-alg-prog/lecture10/cmake-build-debug/CMakeFiles/CMakeError.log".

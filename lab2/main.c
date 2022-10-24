@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <limits.h>
+#include <locale.h>
 
-#define lmax 100
+#define LMAX SHRT_MAX
 
 
 int count_contains(int a, int z) {
@@ -17,12 +18,9 @@ int count_contains(int a, int z) {
 }
 
 
-void prit_matrix(int *array, int x, int y) {
-    for (int i = 0; i < x; ++i) {
-        for (int j = 0; j < y; ++j) {
-            printf("%d ", *array++);
-        }
-        printf("\n");
+void prit_array(int array[], int length) {
+    for (int i = 0; i < length; ++i) {
+        printf("%d ", array[i]);
     }
     printf("\n");
 }
@@ -51,61 +49,24 @@ int get_value(int min, int max, char phrase[]) {
 
 
 int main() {
-    int n, m, x, y, p, q, B[lmax][lmax],A[lmax][lmax], C[lmax][lmax], max_i = 0, max_j = 0;//почему-то компилятор не даёт поставить больше значения
-    n = get_value(2, INT_MAX, "Введите число n");
-    m = get_value(2, INT_MAX, "Введите число m");
-    x = get_value(2, INT_MAX, "Введите число x");
-    y = get_value(2, INT_MAX, "Введите число y");
-
+    setlocale(LC_ALL, "RU");
+    printf("Лабораторная работа №2 \nВыполнил: Пашенцев Павел Владимирович\nЗадача 2\n");
+    int n = 0, z = 0, A[LMAX], B[LMAX], count = 0, temp = 0, k = 0;
+    n = get_value(1, LMAX, "Введите число n");
+    z = get_value(0, 10, "Введите цифру z");
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            A[i][j] = get_value(INT_MIN,INT_MAX,"Введите элемент матрицы A");
-        }
+        A[i] = get_value(INT_MIN, INT_MAX, "Введите новый элемент");
     }
-
-    for (int i = 0; i < x; ++i) {
-        for (int j = 0; j < y; ++j) {
-            B[i][j] = get_value(INT_MIN,INT_MAX,"Введите элемент матрицы B");
+    prit_array(A, n);
+    for (int i = 0; i < n; ++i) {
+        temp = count_contains(A[i], z);
+        if (temp > 0) {
+            B[k] = A[i];
+            ++k;
         }
+        count += temp;
     }
-
-    //prit_matrix(*A,n,m);
-    p = (n>x)? n:x;
-    q = (m>y)? m:y;
-    for (int i = 0; i < p; ++i) {
-        for (int j = 0; j < q; ++j) {
-            if(i<n && i<x && j<m && j<y){
-                C[i][j] = A[i][j] +B [i][j];
-            } else {
-                if(i < n  && j < m ){//&& i >= x && j >= y
-                    C[i][j] = A[i][j];
-                } else {
-                    if(i < x &&  j < y){//i >= n && j >= m &&
-                        C[i][j] = B[i][j];
-                    } else{
-                        C[i][j] = 0;
-                    }
-                }
-            }
-            if(C[max_i][max_j]<C[i][j]){
-                max_i = i;
-                max_j = j;
-            }
-        }
-    }
-    int flag = 0;
-    for (int i = 0; i < n && !flag; ++i) {
-        if(A[i][0]==C[max_i][max_j]){
-            C[max_i][max_j] = 0;
-            flag = 1;
-        }
-
-    }
-    for (int i = 0; i < p; ++i) {
-        for (int j = 0; j < q; ++j) {
-            printf("%d \t", C[i][j]);
-        }
-        printf("\n");
-    }
+    printf("%d встречается в массиве %d раз\n", z, count);
+    prit_array(B, k);
     return 0;
 }
