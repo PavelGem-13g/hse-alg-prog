@@ -1,12 +1,6 @@
 #include <stdio.h>
-
+#include <limits.h>
 #define lmax 1000
-
-void initialize(int *a){
-    for(int *i = a; i < a + lmax; ++i){
-        *i = -1001;
-    }
-}
 
 int input(int min, int max, char phrase[]){
     int result = 0, k = 0;
@@ -14,14 +8,14 @@ int input(int min, int max, char phrase[]){
         printf(phrase);
         k = scanf("%d", &result);
         while(getchar() != '\n');
-    }while(k!=1 && (result<min || max<result));
+    }while(k!=1 || (result<min || max<result));
     return result;
 }
 
 void input_array(int *a, int *n){
     *n = input(2, 1000, "Введите число n ");
     for(int *i = a; i < a + *n; ++i){
-        *i = input(-1000,1000, "Введите элемент массива ");
+        *i = input(-INT_MIN,INT_MAX, "Введите элемент массива ");
     }
 }
 
@@ -32,27 +26,55 @@ void output_array(int *a, int n){
     printf("\n");
 }
 
-void diff(int *a, int *n,  int *b, int *k){
+void diff(int *a, int *n, int *b, int *m){
     int *j, *i;
-    *k = 0;
     for(i = a; i < a + *n; ++i){
         j = b;
-        while(*i != *j && j<b+*k){
+        while(*i != *j && j<b+*m){
             ++j;
         }
         if(*i!=*j){
-            ++*(k);
+            ++*(m);
             *j = *i;
         }
     }
 }
 
+void counter(int *a, int n, int *unic,int *counts, int *k){
+    int j, i;
+    int flag;
+    for(i = 0; i < n; ++i){
+        j = 0;
+        flag = 1;
+        while(j<*k && flag){
+            if(*(a+i)==*(unic+j)){
+                ++(*(counts+j));
+                flag = 0;
+            }
+            ++j;
+        }
+        if(*(a+i)!=*(unic+j) && flag){
+            *(unic+j) = *(a+i);
+            *(counts+j) = 1;
+            ++(*k);
+        }
+    }
+}
+
 int main(){
-    int a[lmax], b[lmax], n = 0, k = 0;
-    initialize(a);
-    initialize(b);
+    printf("Лабораторная работа №3\nВыполнил: Пашенцев Павел Владимирович\nЗадача 3\n");
+    int a[lmax], b[lmax], unic[lmax], counts[lmax], n = 0, k = 0, m = 0;
     input_array(a, &n);
+    printf("Массив А\n");
     output_array(a, n);
-    diff(a, &n, b, &k);
-    output_array(b, k);
+
+    counter(a, n, unic, counts, &k);
+    printf("Различные значения массива А\n");
+    output_array(unic, k);
+    printf("Повторены столько раз соответственно\n");
+    output_array(counts,k);
+
+    diff(a,&n,b,&m);
+    printf("Значения массива B\n");
+    output_array(b, m);
 }

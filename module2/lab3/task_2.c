@@ -8,7 +8,7 @@ int input(int min, int max, char phrase[]){
         printf(phrase);
         k = scanf("%d", &result);
         while (getchar()!='\n');
-    } while (k!=1 && (result<min || max<result));
+    } while (k!=1 || (result<min || max<result));
     return result;
 }
 void input_matrix(int *a, int *n, int *m){
@@ -16,7 +16,7 @@ void input_matrix(int *a, int *n, int *m){
     *m = input(2, 1000, "Введите число m ");
     for (int i = 0; i < *n; ++i){
         for (int j = 0; j < *m; ++j){
-            *(a+i*(*m)+j) = input(0,1000, "Введите значение матрицы ");
+            *(a+i*(*m)+j) = input(-1000,1000, "Введите значение матрицы ");
         }
     }
 }
@@ -30,7 +30,7 @@ void output_matrix(int *a, int n, int m){
     }
 }
 
-int s(int *a, int n , int m){
+int func(int *a, int n , int m){
     int min = INT_MAX, temp_max = 0;
     for (int j = 0; j < m; ++j){
         temp_max = *(a+j);
@@ -47,10 +47,11 @@ int s(int *a, int n , int m){
 }
 
 int main(){
-    int a[lmax][lmax], n, m, result = 0;
-    input_matrix(a, &n, &m);
-    output_matrix(a, n, m);
-    result = s(a, n, m);
-    printf("Результат вычисления программы %d \n", result);
+    printf("Лабораторная работа №3\nВыполнил: Пашенцев Павел Владимирович\nЗадача 2\n");
+    int A[lmax][lmax], n, m, s = 0;
+    input_matrix(A, &n, &m);
+    output_matrix(A, n, m);
+    s = func(A, n, m);
+    printf("Результат вычисления программы %d \n", s);
     return 0;
 }
