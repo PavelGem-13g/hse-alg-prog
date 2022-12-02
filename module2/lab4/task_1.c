@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
 #define lmax 1000
 
 int input_integer(int min, int max, char phrase[]){
@@ -17,15 +19,7 @@ int input_integer(int min, int max, char phrase[]){
     return result;
 }
 
-void print_string(char phrase[]){
-    while(*phrase){
-        printf("%c", phrase);
-        ++phrase;
-    }
-    printf("\n");
-}
-
-void input_array(char *array[lmax], int *k){
+void input_array(char array[lmax][lmax], int *k){
     *k = input_integer(2, 1000, "Введите длину массива ");
     for (int i = 0; i < *k; ++i){
         puts("Введите новый элемент ");
@@ -33,35 +27,91 @@ void input_array(char *array[lmax], int *k){
     }
 }
 
-void output_array(char *array[lmax], int k){
-    puts("\nВывод массива ");
+void output_array(char array[lmax][lmax], int k){
     for (int i = 0; i < k; ++i){
         puts(array[i]);
     }
 }
 
-int is_integer(char str){
-    //int result = 0;
-    //int temp = ord(str);
-    //return 48<temp && temp<58;
-}
-
-void select_string(char array[lmax][lmax], int k, char output[lmax][lmax]){
+void select_string(char array[lmax][lmax], int n, char output[lmax][lmax], int numbers[lmax], int *k){
     char avoid_symbols[4] = {'.', ',',';',':'};
-    char *temp_symbol = NULL;
-    int temp_result = 0;
-    for (int i = 0; i < k; ++i){
+    char *start, *temp_symbol;
+    int flag;
+    for (int i = 0; i < n; ++i){
         temp_symbol = array[i];
-        while(temp+1 && temp_result){
-            temp_result=strcspn(temp, avoid_symbols);
-            ++temp;
+        start = NULL;
+        while (*temp_symbol)
+        {
+            flag = 0;
+            for(int j = 0; j < 4; ++j) {
+                if (*temp_symbol == avoid_symbols[j]) {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag && start){
+                strncpy(&output[*k][0], start, temp_symbol - start);
+                output[*k][temp_symbol - start] = '\0';
+                numbers[*k] = i;
+                start = NULL;
+                ++(*k);
+            } else if (!flag && !start){
+                start = temp_symbol;
+            }
+            ++temp_symbol;
+        }
+        if(!*temp_symbol && start){
+            strncpy(&output[*k][0], start, temp_symbol - start);
+            output[*k][temp_symbol - start] = '\0';
+            numbers[*k] = i;
+            ++(*k);
         }
     }
 }
 
+int number(char strings[lmax][lmax], int n){
+    int result = -1,max_length = 0;
+    for(int i = 0; i < n; ++i){
+        char *temp_symbol = &strings[i][0];
+        while (isdigit(*temp_symbol)){
+            ++temp_symbol;
+        }
+        if(temp_symbol-&strings[i][0]>max_length){
+            max_length = temp_symbol-&strings[i][0];
+            result = i;
+        }
+    }
+    return result;
+}
+
+void add_stars(char string[lmax]){
+    unsigned long length = strlen(string);
+    char *temp_symbol = &string[length - 1];
+    while (!isdigit(*temp_symbol)){
+        *(temp_symbol+3) = *temp_symbol;
+        --temp_symbol;
+    }
+    *(temp_symbol+3) = *temp_symbol;
+    for(int i = 0; i < 3; ++i){
+        *(temp_symbol+i) ='*';
+    }
+}
+
 int main(){
-    char *strings[lmax], k = 3;
-    input_array(strings, &k);
-    //printf("%d", is_integer('a'));
-    output_array(strings, k);
+    char strings[lmax][lmax], clear[lmax][lmax];
+    int n = 0, k = 0, numbers[lmax], num;
+    input_array(strings, &n);
+    puts("_____________\nВывод исходного массива ");
+    output_array(strings, n);
+    select_string(strings, n, clear, numbers, &k);
+    puts("_____________\nВывод массива подстрок");
+    output_array(clear, k);
+    num = number(clear,k);
+    if(num==-1){
+        printf("_____________\nНе найдено строк с цифрами\n");
+    } else{
+        add_stars(strings[numbers[num]]);
+        puts("_____________\nВывод исходного измененного массива ");
+        output_array(strings, n);
+    }
 }

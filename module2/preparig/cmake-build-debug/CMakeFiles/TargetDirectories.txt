@@ -1,0 +1,3 @@
+/Users/pavel/Git/hse-alg-prog/module2/preparig/cmake-build-debug/CMakeFiles/preparig.dir
+/Users/pavel/Git/hse-alg-prog/module2/preparig/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/pavel/Git/hse-alg-prog/module2/preparig/cmake-build-debug/CMakeFiles/rebuild_cache.dir

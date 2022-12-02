@@ -1,0 +1,3 @@
+/Users/pavel/Git/hse-alg-prog/module2/strnspytest/cmake-build-debug/CMakeFiles/strnspytest.dir
+/Users/pavel/Git/hse-alg-prog/module2/strnspytest/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/pavel/Git/hse-alg-prog/module2/strnspytest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
