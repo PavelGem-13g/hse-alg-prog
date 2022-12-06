@@ -1,6 +1,6 @@
 // Выделить из каждой строки и напечатать подстроки не содержащие символов '.', ',', ';', ':';
 // Среди выделенных подстрок найти подстроку начинающуюся с наибольшего (но не нулевого) числа цифр;
-// Преобразовать исходную строку, которой принадлежит найденная подстрока, следующим образом: вставить три звездочки перед последней цифрой.
+// Преобразовать исходную строку, которой принадлежит найденная подстрока, следующим образом: удалить путем сдвига все латинские буквы.
 
 #include <stdio.h>
 #include <string.h>
@@ -8,40 +8,36 @@
 
 #define lmax 1000
 
-int input_integer(int min, int max, char phrase[]){
-    int result = 0;
-    int k = 0;
-    do{
-        puts(phrase);
-        k = scanf("%d", &result);
-        while(getchar() != '\n');
-    }while(k!=1 || (result < min || max < result));
-    return result;
-}
+void inputArray(char array[lmax][lmax], int *k){
 
-void input_array(char array[lmax][lmax], int *k){
-    *k = input_integer(2, 1000, "Введите длину массива ");
+    *k = 0;
+    int count = 0;
+    do{
+        puts("Введите длину массива");
+        count = scanf("%d", k);
+        while(getchar() != '\n');
+    }while(count != 1 || (*k < 2 || 1000 < *k));
+
     for (int i = 0; i < *k; ++i){
         puts("Введите новый элемент ");
         gets(array[i]);
     }
 }
 
-void output_array(char array[lmax][lmax], int k){
+void outputArray(char array[lmax][lmax], int k){
     for (int i = 0; i < k; ++i){
         puts(array[i]);
     }
 }
 
-void select_string(char array[lmax][lmax], int n, char output[lmax][lmax], int numbers[lmax], int *k){
+void selectString(char array[lmax][lmax], int n, char output[lmax][lmax], int numbers[lmax], int *k){
     char avoid_symbols[4] = {'.', ',',';',':'};
     char *start, *temp_symbol;
     int flag;
     for (int i = 0; i < n; ++i){
         temp_symbol = array[i];
         start = NULL;
-        while (*temp_symbol)
-        {
+        while (*temp_symbol){
             flag = 0;
             for(int j = 0; j < 4; ++j) {
                 if (*temp_symbol == avoid_symbols[j]) {
@@ -84,34 +80,49 @@ int number(char strings[lmax][lmax], int n){
     return result;
 }
 
-void add_stars(char string[lmax]){
-    unsigned long length = strlen(string);
-    char *temp_symbol = &string[length - 1];
-    while (!isdigit(*temp_symbol)){
-        *(temp_symbol+3) = *temp_symbol;
-        --temp_symbol;
+void changeString(char string[lmax]){
+/*    char *temp_symbol = string, *position = string;
+    while (*temp_symbol){
+        if (!(('A'<=*temp_symbol && *temp_symbol <= 'Z') || ('a'<=*temp_symbol && *temp_symbol <= 'z'))){
+            *position = *temp_symbol;
+            ++position;
+        }
+        ++temp_symbol;
     }
-    *(temp_symbol+3) = *temp_symbol;
-    for(int i = 0; i < 3; ++i){
-        *(temp_symbol+i) ='*';
+    *position = *temp_symbol;*/
+    char result_string[lmax];
+    char *temp_symbol = string, *position = result_string;
+    while (*temp_symbol){
+        if(('0'<=*temp_symbol && *temp_symbol<='9')
+        ||('a'<=tolower(*temp_symbol) && tolower(*temp_symbol)<='z')){
+            *position = *temp_symbol;
+            ++position;
+        } else{
+            *position = *temp_symbol;
+            ++position;
+            *position = *temp_symbol;
+            ++position;
+        }
+        ++temp_symbol;
     }
+    strcpy(string, result_string);
 }
 
 int main(){
     char strings[lmax][lmax], clear[lmax][lmax];
     int n = 0, k = 0, numbers[lmax], num;
-    input_array(strings, &n);
+    inputArray(strings, &n);
     puts("_____________\nВывод исходного массива ");
-    output_array(strings, n);
-    select_string(strings, n, clear, numbers, &k);
+    outputArray(strings, n);
+    selectString(strings, n, clear, numbers, &k);
     puts("_____________\nВывод массива подстрок");
-    output_array(clear, k);
+    outputArray(clear, k);
     num = number(clear,k);
     if(num==-1){
         printf("_____________\nНе найдено строк с цифрами\n");
     } else{
-        add_stars(strings[numbers[num]]);
+        changeString(strings[numbers[num]]);
         puts("_____________\nВывод исходного измененного массива ");
-        output_array(strings, n);
+        outputArray(strings, n);
     }
 }
