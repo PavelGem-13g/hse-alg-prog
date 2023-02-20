@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/pavel/Git/hse-alg-prog/lab2 -B/Users/pavel/Git/hse-alg-prog/lab2/cmake-build-debug
+  command = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/pavel/Git/hse-alg-prog/module1/lab2 -B/Users/pavel/Git/hse-alg-prog/module1/lab2/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

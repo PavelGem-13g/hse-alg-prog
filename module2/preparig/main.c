@@ -1,12 +1,17 @@
 #include <stdio.h>
-#define lmax 1000
 
-void func(int a[lmax][lmax]){
-    a[1][1] = 7;
+int zam(char *s)
+{int f=0;
+    for(;*s;s++)
+        if (*s>='A'&&*s<='J')
+    {f=1;*s=*s-'A'+0;
+    }
+    return 0;
 }
 
-int main() {
-    int a[lmax][lmax];
-    func(a);
-    printf("%d",a[1][1]);
+int main()
+{
+    char a[] = "AB";
+    zam(a);
+    puts(a);
 }

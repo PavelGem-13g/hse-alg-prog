@@ -36,7 +36,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Users/pavel/Git/hse-alg-prog/module$ 1/lab1/cmake-build-debug/
+cmake_ninja_workdir = /Users/pavel/Git/hse-alg-prog/module1/lab1/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target lab1
 
@@ -46,7 +46,7 @@ cmake_ninja_workdir = /Users/pavel/Git/hse-alg-prog/module$ 1/lab1/cmake-build-d
 
 build cmake_object_order_depends_target_lab1: phony || CMakeFiles/lab1.dir
 
-build CMakeFiles/lab1.dir/main.c.o: C_COMPILER__lab1_Debug /Users/pavel/Git/hse-alg-prog/module$ 1/lab1/main.c || cmake_object_order_depends_target_lab1
+build CMakeFiles/lab1.dir/main.c.o: C_COMPILER__lab1_Debug /Users/pavel/Git/hse-alg-prog/module1/lab1/main.c || cmake_object_order_depends_target_lab1
   DEP_FILE = CMakeFiles/lab1.dir/main.c.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99
   OBJECT_DIR = CMakeFiles/lab1.dir
@@ -76,7 +76,7 @@ build lab1: C_EXECUTABLE_LINKER__lab1_Debug CMakeFiles/lab1.dir/main.c.o
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/Users/pavel/Git/hse-alg-prog/module 1/lab1/cmake-build-debug" && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/pavel/Git/hse-alg-prog/module1/lab1/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -87,7 +87,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/Users/pavel/Git/hse-alg-prog/module 1/lab1/cmake-build-debug" && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S"/Users/pavel/Git/hse-alg-prog/module 1/lab1" -B"/Users/pavel/Git/hse-alg-prog/module 1/lab1/cmake-build-debug"
+  COMMAND = cd /Users/pavel/Git/hse-alg-prog/module1/lab1/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/pavel/Git/hse-alg-prog/module1/lab1 -B/Users/pavel/Git/hse-alg-prog/module1/lab1/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -103,7 +103,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /Users/pavel/Git/hse-alg-prog/module 1/lab1/cmake-build-debug
+# Folder: /Users/pavel/Git/hse-alg-prog/module1/lab1/cmake-build-debug
 
 build all: phony lab1
 

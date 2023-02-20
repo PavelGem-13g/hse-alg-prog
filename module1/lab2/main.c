@@ -17,6 +17,17 @@ int count_contains(int a, int z) {
     return result;
 }
 
+int change_place(int a){
+    int result = 0, temp = 0;
+    while (a > 0) {
+        temp = a % 10;
+        result*=10;
+        result += temp;
+        a /= 10;
+    }
+    return result;
+}
+
 
 void prit_array(int array[], int length) {
     for (int i = 0; i < length; ++i) {
@@ -61,12 +72,11 @@ int main() {
     for (int i = 0; i < n; ++i) {
         temp = count_contains(A[i], z);
         if (temp > 0) {
-            B[k] = A[i];
-            ++k;
+            A[i] = change_place(A[i]);
         }
         count += temp;
     }
     printf("%d встречается в массиве %d раз\n", z, count);
-    prit_array(B, k);
+    prit_array(A, n);
     return 0;
 }

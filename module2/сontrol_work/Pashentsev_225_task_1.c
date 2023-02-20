@@ -9,7 +9,7 @@
 #include <stdio.h>
 #define lmax 1000
 
-void func(int c[lmax][lmax], int n, int m, int d[lmax], int k, int *result){
+void func(int c[][lmax], int n, int m, int d[], int k, int *result){
     int row, changes, temp;
     for (int i = 0; i < k; ++i){
         row = d[i]-1;
