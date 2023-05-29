@@ -1,8 +1,16 @@
-ФИО:
-	Фамилия: Пашенцев
-	Имя: Павел
-	Отчество: Владимирови
-Группа: БИВ225
-Оценки: 
+FIO:
+	Lastname: Sadkovskaya
+	Name: Margarita
+	Patronymic: Alekseevna
+Group: BIV224
+Grades: 
+6	6	8	9	10	
+Average: 7.8
+FIO:
+	Lastname: Пашенцев
+	Name: Павел
+	Patronymic: Владимирови
+Group: БИВ225
+Grades: 
 9	4	10	9	10	
-Средняя оценка: 8.4
+Average: 8.4

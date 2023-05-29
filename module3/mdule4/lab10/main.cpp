@@ -16,7 +16,7 @@ struct Fio{
         this->patronymic = patronymic;
     };
     void show(){
-        cout<<"ФИО:"<<endl<<"\t"<<"Фамилия: "<<lastname<<endl<<"\t"<<"Имя: "<<name<<endl<<"\t"<<"Отчество: "<<patronymic<<endl;
+        cout<<"FIO:"<<endl<<"\t"<<"Lastname: "<<lastname<<endl<<"\t"<<"Name: "<<name<<endl<<"\t"<<"Patronymic: "<<patronymic<<endl;
     }
 };
 
@@ -34,12 +34,12 @@ struct Grade{
     }
 
     void show(){
-        cout<<"Оценки:"<<endl;
+        cout<<"Grades:"<<endl;
         for (int i = 0; i < lmax; ++i) {
             cout<<grades[i]<<"\t";
         }
         cout<<endl;
-        cout<<"Средняя оценка: "<<average;
+        cout<<"Average: "<<average;
     }
 };
 
@@ -56,7 +56,7 @@ struct Student{
 
     void show(){
         fio.show();
-        cout<<"Группа: "<<group<<endl;
+        cout<<"Group: "<<group<<endl;
         grade.show();
         cout<<endl;
     }
@@ -84,32 +84,6 @@ struct Node{
     }
 };
 
-struct Stack{
-    Node *top;
-
-    Stack(){
-        top = NULL;
-    }
-
-    void push(Student *student){
-        Node *node = new Node(student, top);
-        node->next = top;
-        top = node;
-    }
-
-    Node *pop(){
-        return top;
-    }
-
-    void show(){
-        Node *temp = top;
-        while (temp){
-            temp->info->show();
-            temp = temp->next;
-        }
-    }
-};
-
 struct Queue{
     Node *first;
     Node *last;
@@ -124,10 +98,13 @@ struct Queue{
             first = new Node(student);
             last = first;
         } else{
-            Node *node = new Node(student, last);
+
+            Node *node = new Node(student,last);
             last->next = node;
             last = node;
         }
+        first->previous = last;
+        last->next = first;
     }
 
     Node *peek(){
@@ -135,49 +112,31 @@ struct Queue{
     }
 
     void show(){
+        if(!first){
+            return;
+        }
         Node *temp = this->first;
-        while (temp){
+        do{
             temp->info->show();
             temp = temp->next;
-        }
+        } while (temp!=first);
     }
 };
 
 void print_nodes(Node *top){
     Node *temp = top;
     cout<<"_________________________________"<<endl;
-    while (temp){
+    while (temp->next != top ){
         temp->info->show();
         temp = temp->next;
     }
     cout<<"_________________________________"<<endl;
 }
 
-void print_nodes_reverse(Node *top){
-    Node *temp = top;
-    cout<<"_________________________________"<<endl;
-    while (temp){
-        temp->info->show();
-        temp = temp->previous;
-    }
-    cout<<"_________________________________"<<endl;
-}
 
-Queue *best_students(Stack *students){
-    auto *result = new Queue();
-    Node *temp = students->pop();
-    while (temp){
-        if(temp->info->grade.average>=8){
-            result->enqueue(temp->info);
-        }
-        temp = temp->next;
-    }
-    //print_nodes(result->peek());
-    return result;
-}
 
-Stack *load_stack(string filename){
-    Stack *result = new Stack();
+Queue *load_queue(string filename){
+    Queue *result = new Queue();
     ifstream in;
     in.open(filename);
     if(in.peek()!=EOF){
@@ -189,35 +148,34 @@ Stack *load_stack(string filename){
                 in>>grades[i];
             }
             Student *student = new Student(lastname, name, patronomic, gruop, grades);
-            result->push(student);
+            result->enqueue(student);
         }
     }
     return result;
 }
 
-void save(Node *start_node,string filename){
+void Save(Node *start_node,string filename){
     ofstream out;
     out.open(filename);
     Node *temp = start_node;
-    while (temp){
-        out<<"ФИО:"<<endl<<"\t"<<"Фамилия: "<<temp->info->fio.lastname<<endl<<"\t"
-           <<"Имя: "<<temp->info->fio.name<<endl<<"\t"
-           <<"Отчество: "<<temp->info->fio.patronymic<<endl;
-        out<<"Группа: "<<temp->info->group<<endl;
-        out<<"Оценки: "<<endl;
+    do{
+        out<<"FIO:"<<endl<<"\t"<<"Lastname: "<<temp->info->fio.lastname<<endl<<"\t"
+           <<"Name: "<<temp->info->fio.name<<endl<<"\t"
+           <<"Patronymic: "<<temp->info->fio.patronymic<<endl;
+        out<<"Group: "<<temp->info->group<<endl;
+        out<<"Grades: "<<endl;
         for (int i = 0; i < 5; ++i) {
             out<<temp->info->grade.grades[i]<<"\t";
         }
         out<<endl;
-        out<<"Средняя оценка: "<<temp->info->grade.average;
+        out<<"Average: "<<temp->info->grade.average<<endl;
         temp = temp->next;
-    }
+    }while (temp!=start_node);
     out.close();
 }
-
 string filename_input(string type){
     string result;
-    cout<<"Введите название для "+type+" файла"<<endl;
+    cout<<"Write filename for "+type<<endl;
     cin>>result;
     return result;
 }
@@ -225,45 +183,69 @@ string filename_input(string type){
 void free_memory(Node *node){
     Node *temp = node;
     Node *next;
-    while (temp){
+    do{
         next = temp->next;
         delete temp;
         temp = next;
-    }
+    }while(temp==node);
 }
+
+bool task(Node *top){
+    Node *temp = top;
+    bool flag = 0;
+    float min_av = temp->info->grade.average;
+    if(!top){
+        return false;
+    }
+    do{
+        if (temp->info->grade.average < min_av){
+            min_av = temp->info->grade.average;
+        }
+        temp = temp->next;
+    } while (temp!=top);
+
+    Node *next;
+    do
+    {
+        if(temp->info->grade.average == min_av)
+        {
+            flag = 1;
+            temp->previous->next = temp->next;
+            temp->next->previous = temp->previous;
+            next = temp->previous;
+            delete temp;
+            temp = next;
+        }
+        temp = temp->next;
+    }while(temp!=top);
+    return flag;
+
+}
+
+
 
 int main() {
     string filename;
 
-    filename = filename_input("входного");
-    Stack *stack = load_stack(filename);
-    if(stack->pop()){
-        cout<<"Вывод входных значений (стек)"<<endl;
-        print_nodes(stack->pop());
-
-
-        Queue *best = best_students(stack);
-        if(best->peek()){
-            cout<<"Вывод лучших студентов (очередь)"<<endl;
-            print_nodes(best->peek());
-            cout<<"Вывод в обратном порядке"<<endl;
-            print_nodes_reverse(best->last);
-        } else{
-            cout<<"Нет студентов-отличников"<<endl;
+    filename = filename_input("input");
+    Queue *queue = load_queue(filename);
+    if(queue->peek()){
+        cout<<"Structer from file"<<endl;
+        queue->show();
+        if(task(queue->peek())){
+            cout << "After changes"<< endl;
+            cout<<endl;
+            queue->show();
+            filename = filename_input("write");
+            Save(queue->peek(), filename);
         }
-
-        filename = filename_input("выходного");
-        save(best->peek(), filename);
-
-        free_memory(best->peek());
-        delete best;
+        else
+            cout<<"nothing has changes"<<endl;
     } else{
-        cout<<"Введен пустой стек"<<endl;
+        cout<<"Queue is empty"<<endl;
     }
-
-    free_memory(stack->pop());
-    delete stack;
-    cout<<"Память очищена";
-
+    free_memory(queue->first);
+    delete queue;
+    cout<<"Memory is free";
     return 0;
 }
